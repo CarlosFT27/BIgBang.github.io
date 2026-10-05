@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>El Big Bang — Documental interactivo</title>
+<meta name="color-scheme" content="dark">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Space+Grotesk:wght@400;600&display=swap">
+<style>
+:root{--bg:#030305;--ink:#eef1ff;--mute:#a9b0c6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit;margin:0}
+html,body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Space Grotesk',Inter,sans-serif;font-weight:600;letter-spacing:-.03em;line-height:.98}
+h2{font-size:clamp(2.1rem,5.6vw,5.2rem);margin-bottom:1.6rem}
+.k{font-size:.68rem;letter-spacing:.34em;color:var(--mute);margin-bottom:1.4rem}
+.p{color:var(--mute);line-height:1.7;max-width:46ch;margin-bottom:1rem;font-weight:300}
+.pts{list-style:none;padding:0;max-width:46ch}.pts li{border-left:1px solid rgba(255,255,255,.22);padding:.1rem 0 .1rem 1rem;margin-bottom:1rem;color:var(--mute);line-height:1.6;font-weight:300;font-size:.95rem}
+.a{position:absolute;left:0;width:100%;object-fit:cover;will-change:transform}
+.bar{position:fixed;left:0;top:0;height:2px;width:100%;background:#9db4ff;transform:scaleX(0);transform-origin:left;z-index:60}
+.dust{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;opacity:.5}
+.hero{position:relative;height:100vh;height:100svh;overflow:hidden;display:grid;place-items:center;text-align:center}
+.hero .a{inset:-10% 0;height:120%}
+.hero .w{position:relative;z-index:2}
+.hero h1{font-size:clamp(3.4rem,15vw,14rem)}
+.hero .hp{margin-top:1.6rem;color:var(--mute);font-weight:300;letter-spacing:.08em}
+.cue{position:absolute;bottom:5vh;left:0;right:0;font-size:.65rem;letter-spacing:.4em;color:var(--mute);z-index:2}
+.sec{position:relative;z-index:1}
+.si{position:relative;min-height:100vh;display:grid;align-items:center;padding:14vh 7vw;will-change:transform,opacity}
+.shade{position:absolute;inset:0;background:var(--bg);opacity:0;z-index:4;pointer-events:none}
+.im{position:relative;overflow:hidden;background:#020204}
+.im .a{top:-8%;height:116%}
+.cap{position:absolute;left:1rem;bottom:.8rem;font-size:.62rem;letter-spacing:.25em;color:#d5daf0;z-index:2}
+.A .im,.C .im{position:absolute;inset:0}
+.A .im::after,.C .im::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,3,5,.88),rgba(3,3,5,.1) 72%),linear-gradient(0deg,rgba(3,3,5,.7),transparent 55%)}
+.A .tx{position:relative;z-index:3;align-self:end;padding-bottom:4vh}
+.C .tx{position:relative;z-index:3;justify-self:center;text-align:center}
+.C .im::after{background:radial-gradient(ellipse at center,rgba(3,3,5,.35),rgba(3,3,5,.8))}
+.C h2{font-size:clamp(2.6rem,8.5vw,8.5rem)}.C .p{margin:0 auto 1rem}
+.B{grid-template-columns:5fr 6fr;gap:6vw}.B .im{height:76vh}.B.r .im{order:-1}
+.D{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2vh}
+.D .im{width:min(68vw,110vh);aspect-ratio:16/10;order:-1}.D .p{margin-left:auto;margin-right:auto}
+.dt{position:absolute;max-width:14vw;font-size:.66rem;letter-spacing:.2em;color:var(--mute);line-height:1.8;z-index:3}
+.d0{top:16vh;left:4vw}.d1{top:16vh;right:4vw;text-align:right}.d2{bottom:16vh;left:4vw}.d3{bottom:16vh;right:4vw;text-align:right}
+.E{grid-template-columns:1fr 1fr;gap:1.4vw}.E .im{height:58vh}.E .tx{grid-column:1/-1;padding-top:3vh}
+.tl{position:relative;height:100vh;height:100svh;overflow:hidden;z-index:1}
+.wrap{height:100%;display:flex;align-items:center;transform-origin:center}
+.trk{display:flex;align-items:flex-start;gap:6vw;padding:0 21vw;position:relative;will-change:transform}
+.st{position:relative;flex:0 0 58vw;padding-top:76px}
+.st::before{content:'';position:absolute;left:0;top:44px;width:calc(100% + 6vw);height:1px;background:linear-gradient(90deg,rgba(157,180,255,.7),rgba(157,180,255,.2))}
+.st i{position:absolute;left:0;top:39px;width:11px;height:11px;border-radius:50%;background:#dfe6ff;box-shadow:0 0 18px 3px rgba(150,175,255,.6)}
+.st .d{position:absolute;top:0;left:0;font-size:.66rem;letter-spacing:.3em;color:var(--mute)}
+.st .im{height:44vh;margin-bottom:1.2rem;will-change:transform,opacity}
+.st .im .a{top:0;height:100%}
+.st h3{font-size:clamp(1.5rem,3vw,2.7rem);margin-bottom:.6rem}.st .p{font-size:.9rem;margin:0}
+.st .n{color:#7f9cff;font-size:.7rem;letter-spacing:.3em}
+.dark{display:none}
+.gal{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:26vh;gap:.6vw;margin-top:4vh}
+.gi{position:relative;overflow:hidden;cursor:zoom-in;background:#020204}.gi .a{top:0;height:100%;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.gi:hover .a,.gi:focus-visible .a{transform:scale(1.07)}
+.gi:nth-child(1){grid-column:span 4;grid-row:span 2}.gi:nth-child(2),.gi:nth-child(3){grid-column:span 2}.gi:nth-child(4),.gi:nth-child(5){grid-column:span 3}
+.lb{position:fixed;inset:0;z-index:90;background:rgba(3,3,5,.95);display:grid;place-items:center;cursor:zoom-out;animation:fi .5s}
+.lb .im{width:min(92vw,150vh);aspect-ratio:16/9}.lb p{text-align:center;margin-top:1rem;color:var(--mute);font-size:.8rem;letter-spacing:.2em}
+@keyframes fi{from{opacity:0}}
+.wb{position:fixed;inset:0;z-index:0;pointer-events:none;background:var(--bg);overflow:hidden}
+.wb i{position:absolute;inset:-20%;background:radial-gradient(ellipse 55% 45% at 22% 28%,rgba(var(--wc,20,24,60),var(--wa,.15)),transparent 70%)}
+.wb i+i{background:radial-gradient(ellipse 60% 50% at 80% 78%,rgba(var(--wc,20,24,60),calc(var(--wa,.15)*.7)),transparent 70%)}
+.A .im,.C .im{-webkit-mask-image:linear-gradient(transparent,#000 24%,#000 76%,transparent);mask-image:linear-gradient(transparent,#000 24%,#000 76%,transparent)}
+.hero>.im{-webkit-mask-image:linear-gradient(#000 60%,transparent);mask-image:linear-gradient(#000 60%,transparent)}
+html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}
+.sec{margin-top:-16vh}.cue{z-index:5}
+.sec .im .a,.hero .a{left:-3%;width:106%}
+.wd{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em;margin-bottom:-.12em}.wd>span{display:inline-block}
+.st i{animation:pl 2.6s ease-in-out infinite}@keyframes pl{50%{box-shadow:0 0 28px 9px rgba(150,175,255,.85)}}
+.tlc{position:absolute;top:5vh;right:7vw;font-size:.7rem;letter-spacing:.3em;color:var(--mute);z-index:4}
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:3vw;margin-top:6vh}
+.stat b{font:600 clamp(2.4rem,6vw,5.5rem)/1 'Space Grotesk',sans-serif;display:block}
+.stat span{font-size:.62rem;letter-spacing:.25em;color:#8fa8ff;display:block;margin-top:.8rem}.stat small{color:var(--mute);font-size:.85rem}
+@media (max-width:820px){.sg{grid-template-columns:1fr 1fr}}
+.ev{display:grid;grid-template-columns:4rem 1fr;gap:1rem;padding:1.6rem 0;border-top:1px solid rgba(255,255,255,.14);max-width:820px}
+.ev b{font:600 1.2rem 'Space Grotesk';color:#8fa8ff}.ev h3{font-size:clamp(1.3rem,2.6vw,2rem);margin-bottom:.5rem}.ev .p{margin:0;max-width:60ch}
+.F{text-align:center;justify-items:center;min-height:130vh}.F h2{font-size:clamp(2.6rem,9vw,9rem);margin-bottom:.4rem}.F .p{margin:2rem auto 0}
+.note{font-size:.7rem;color:#6b728a;text-align:center;padding:4vh 7vw;max-width:80ch;margin:auto;line-height:1.7}
+@media (max-width:820px){.B,.E{grid-template-columns:1fr}.B .im{height:46vh}.E .im{height:34vh}.B.r .im{order:0}.dt{position:static;max-width:none;text-align:center!important}.st{flex-basis:82vw}.trk{padding:0 9vw}.gal{grid-auto-rows:20vh}.gi:nth-child(n){grid-column:span 3;grid-row:auto}.gi:nth-child(1){grid-column:span 6}.si{padding:12vh 6vw}}
+@media (prefers-reduced-motion:reduce){.dust{display:none}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const {createElement:h,useEffect,useRef,useState}=React;
+const mob=innerWidth<768, red=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ASSETS: rutas a fotos reales (NASA/ESA/Webb/Planck) si alojas la página tú mismo. Ej: {cmb:'img/cmb.jpg'}
+   Sin ruta (o si falla la carga), se usa una visualización procedural. */
+const ASSETS={};
+
+const H_=(x,y,s)=>{const n=Math.sin(x*127.1+y*311.7+s*74.7)*43758.5453;return n-Math.floor(n)};
+const vn=(x,y,s)=>{const i=Math.floor(x),j=Math.floor(y),u=x-i,v=y-j,a=H_(i,j,s),b=H_(i+1,j,s),c=H_(i,j+1,s),d=H_(i+1,j+1,s),su=u*u*(3-2*u),sv=v*v*(3-2*v);return a+(b-a)*su+(c-a)*sv+(a-b-c+d)*su*sv};
+const fbm=(x,y,s,o)=>{let t=0,a=.5;for(let i=0;i<o;i++){t+=a*vn(x,y,s+i);x*=2.03;y*=2.03;a*=.5}return t};
+const mx=(a,b,t)=>a.map((v,i)=>Math.round(v+(b[i]-v)*t)).join();
+const gl=(x,px,py,r,c,a)=>{const g=x.createRadialGradient(px,py,0,px,py,r);g.addColorStop(0,`rgba(${c},${a})`);g.addColorStop(1,`rgba(${c},0)`);x.fillStyle=g;x.fillRect(px-r,py-r,2*r,2*r)};
+const lowres=(x,W,H,fn)=>{const nw=240,nh=135,o=document.createElement('canvas');o.width=nw;o.height=nh;const g=o.getContext('2d'),d=g.createImageData(nw,nh);
+  for(let j=0;j<nh;j++)for(let i=0;i<nw;i++){const k=(j*nw+i)*4,p=fn(i,j);d.data[k]=p[0];d.data[k+1]=p[1];d.data[k+2]=p[2];d.data[k+3]=p[3]}
+  g.putImageData(d,0,0);x.imageSmoothingQuality='high';x.drawImage(o,0,0,W,H)};
+const L={
+ n:(x,W,H,R,c,sc,a,pw)=>{const sd=R()*99;lowres(x,W,H,(i,j)=>{let v=fbm(i*sc,j*sc,sd,4);v=Math.pow(Math.max(0,(v-.28)*1.9),pw);return[c[0],c[1],c[2],Math.min(255,v*255*a)]})},
+ c:(x,W,H,R)=>{const sd=R()*99;x.save();x.beginPath();x.ellipse(W/2,H/2,W*.46,H*.46,0,0,6.283);x.clip();
+  lowres(x,W,H,(i,j)=>{const q=Math.min(1,Math.max(0,(fbm(i*.05,j*.05,sd,3)*.8+fbm(i*.2,j*.2,sd+9,2)*.35-.15)/.65));return[255*Math.min(1,Math.max(0,(q-.35)*2.6)),255*Math.max(0,1-Math.abs(q-.5)*3.2),255*Math.min(1,Math.max(0,(.6-q)*2.4)),235]});x.restore()},
+ g:(x,W,H,R,px,py,r,c,a)=>gl(x,px*W,py*H,r*W,c,a),
+ s:(x,W,H,R,n,sz)=>{for(let i=0;i<n;i++){const v=Math.pow(R(),3),s=(.5+v*1.6)*sz;x.fillStyle=`rgba(255,255,255,${.2+v*.8})`;x.fillRect(R()*W,R()*H,s,s)}},
+ G:(x,W,H,R,cx,cy,r,tl,rot,c1,c2,n)=>{const cs=Math.cos(rot),sn=Math.sin(rot),Rr=r*W;gl(x,cx*W,cy*H,Rr*.35,c1,.5);
+  for(let k=0;k<n;k++){const t=Math.pow(R(),.7),a=(k&1)*Math.PI+t*6+(R()+R()-1)*.35,rd=t*Rr,px=Math.cos(a)*rd,py=Math.sin(a)*rd*tl;
+   x.fillStyle=`rgba(${mx(c1,c2,t)},${.55-.3*t})`;x.fillRect(cx*W+px*cs-py*sn,cy*H+px*sn+py*cs,1.6,1.6)}},
+ f:(x,W,H,R,n,rs)=>{for(let i=0;i<n;i++){const X=R()*W,Y=R()*H,s=1+Math.pow(R(),3)*(rs?7:5),c=rs?mx([120,150,255],[255,110,70],X/W):mx([255,225,190],[130,160,255],R());
+   x.save();x.translate(X,Y);x.rotate(R()*3);x.scale(1,.35+R()*.6);gl(x,0,0,s*2,c,.35+R()*.4);x.restore()}},
+ w:(x,W,H,R,n)=>{const p=[...Array(n)].map(()=>[R()*W,R()*H]);x.lineWidth=1.3;x.strokeStyle='rgba(110,140,255,.16)';
+  for(let i=0;i<n;i++)for(let j=i+1;j<n;j++){const a=p[i],b=p[j];if(Math.hypot(a[0]-b[0],a[1]-b[1])<W*.2){x.beginPath();x.moveTo(a[0],a[1]);x.quadraticCurveTo((a[0]+b[0])/2+(R()-.5)*40,(a[1]+b[1])/2+(R()-.5)*40,b[0],b[1]);x.stroke()}}
+  p.forEach(q=>gl(x,q[0],q[1],W*.03,[150,170,255],.35))}
+};
+const PR={
+ hero:[['n',[120,45,15],.03,.45,1.8],['g',.5,.62,.6,[255,110,40],.28],['s',130,1]],
+ what:[['n',[140,55,20],.025,.7,1.4],['g',.5,.5,.4,[255,130,50],.5],['g',.5,.5,.07,[255,235,200],.9],['s',90,1]],
+ age:[['n',[30,50,150],.02,.5,1.6],['G',.5,.5,.3,.45,.4,[255,215,160],[110,140,255],5000],['s',200,1]],
+ exp:[['f',260,1],['s',90,1]],
+ early:[['n',[100,35,150],.035,.5,1.6],['g',.5,.5,.45,[255,120,60],.35],['s',320,.9]],
+ nuc:[['n',[150,110,40],.03,.5,1.7],['g',.5,.5,.3,[255,200,100],.5],['s',260,1.2]],
+ atom:[['n',[100,50,170],.03,.6,1.5],['g',.5,.5,.3,[170,120,255],.4],['s',260,1.2]],
+ dark:[['n',[110,40,30],.02,.3,1.6],['g',.5,.5,.5,[90,30,30],.2]],
+ cmb:[['c']],
+ star:[['n',[200,150,60],.025,.6,1.5],['n',[110,60,170],.05,.4,1.7],['g',.35,.5,.12,[255,235,190],.7],['s',300,1.4]],
+ nebula:[['n',[210,150,70],.02,.7,1.4],['n',[100,60,180],.04,.5,1.5],['n',[60,100,200],.03,.35,2],['s',350,1.4]],
+ gal0:[['n',[40,60,170],.03,.35,1.7],['f',200,0],['s',120,1]],
+ gal1:[['G',.5,.5,.32,.5,.5,[255,215,160],[110,140,255],6000],['f',120,0],['s',150,1]],
+ web:[['n',[30,40,110],.025,.45,1.6],['w',48],['f',220,0]],
+ now:[['G',.3,.55,.2,.5,-.4,[255,215,160],[110,140,255],3500],['f',180,0],['w',30]],
+ spiral:[['G',.5,.5,.4,.6,.3,[255,220,170],[100,140,255],9000],['s',180,1]],
+ cluster:[['f',420,0],['g',.5,.5,.3,[130,150,255],.2]],
+ deep:[['f',600,1],['s',60,1]]
+};
+function paint(c,t){
+  const x=c.getContext('2d'),W=c.width,H=c.height;let s=[...t].reduce((a,ch)=>a*31+ch.charCodeAt(0)|0,7);
+  const R=()=>{s=s+0x6D2B79F5|0;let z=Math.imul(s^s>>>15,1|s);z=z+Math.imul(z^z>>>7,61|z)^z;return((z^z>>>14)>>>0)/4294967296};
+  x.fillStyle='#020204';x.fillRect(0,0,W,H);x.globalCompositeOperation='lighter';
+  (PR[t.split('_')[0]]||PR.deep).forEach(l=>L[l[0]](x,W,H,R,...l.slice(1)));
+}
+function Art({t,alt}){
+  const r=useRef(),[bad,setBad]=useState(!ASSETS[t.split('_')[0]]);
+  useEffect(()=>{if(bad&&r.current)paint(r.current,t)},[bad,t]);
+  return bad?h('canvas',{ref:r,className:'a',width:960,height:540,role:'img','aria-label':alt}):h('img',{className:'a',src:ASSETS[t.split('_')[0]],alt,loading:'lazy',onError:()=>setBad(true)});
+}
+
+/* ---------- Contenido ---------- */
+const ill='Visualización ilustrativa: ';
+const T1=[
+ {id:'que',l:'A',tint:'rgba(140,50,10,.22)',im:[['what','Visualización ilustrativa de un universo primitivo, muy caliente y denso']],k:'',t:'¿QUÉ ES EL BIG BANG?',
+  p:['Es el modelo cosmológico que describe cómo evolucionó el universo desde un estado extremadamente caliente y denso hasta el universo en expansión que observamos hoy.','No fue una explosión en un punto del espacio: fue la expansión del propio espacio. No existe un centro desde el que todo se aleje.','El nombre «Big Bang» lo popularizó el astrónomo Fred Hoyle en 1949.']},
+ {id:'edad',l:'C',im:[['age','Visualización ilustrativa de una galaxia espiral en el universo observable']],k:'LA EDAD DEL UNIVERSO',t:'13.8 MIL MILLONES DE AÑOS',
+  p:['Es la edad estimada del universo observable, calculada a partir de la radiación cósmica de fondo y de la expansión medida con telescopios.','El margen de error es de unas decenas de millones de años.','Mirar lejos es mirar atrás: la luz tarda en llegar, así que vemos los objetos como eran en el pasado.']},
+ {id:'exp',l:'B',tint:'rgba(20,50,150,.25)',im:[['exp','Visualización ilustrativa de galaxias lejanas con su luz desplazada hacia el rojo']],k:'',t:'LA EXPANSIÓN DEL UNIVERSO',
+  pts:['El espacio se estira: las galaxias no cruzan el espacio, la distancia entre ellas crece.','Corrimiento al rojo: la luz de galaxias lejanas se estira y llega más roja.','En 1929 Edwin Hubble mostró que, en general, cuanto más lejos está una galaxia, más rápido se aleja.','Observaciones posteriores indican que la expansión se está acelerando.']},
+ {id:'ins',l:'D',tint:'rgba(150,50,30,.2)',im:[['early','Visualización ilustrativa de un plasma primitivo de partículas']],k:'',t:'LOS PRIMEROS INSTANTES',
+  dt:['EXTREMADAMENTE CALIENTE Y DENSO','SE EXPANDE Y SE ENFRÍA','PARTÍCULAS','NÚCLEOS LIGEROS'],
+  p:['Al principio el universo era un plasma de partículas a temperaturas enormes. Al expandirse se enfrió y, durante los primeros minutos, protones y neutrones formaron núcleos ligeros: sobre todo hidrógeno y helio.','Algunos modelos proponen una fase previa de inflación; sigue en estudio.']},
+ {id:'inf',l:'B r',tint:'rgba(140,60,20,.22)',im:[['early_i','Visualización ilustrativa de una expansión extremadamente rápida del universo primitivo']],k:'UNA HIPÓTESIS',t:'LA INFLACIÓN CÓSMICA',
+  pts:['Propone que, en una fracción de segundo minúscula, el universo se expandió de forma extraordinariamente rápida.','Explicaría por qué el universo es tan uniforme a gran escala y de dónde vienen las pequeñas irregularidades que originaron las galaxias.','Es una hipótesis muy estudiada, pero aún no está confirmada de forma directa.']},
+ {id:'nuc',l:'C',tint:'rgba(150,100,30,.2)',im:[['nuc_n','Visualización ilustrativa de núcleos ligeros formándose en el universo primitivo']],k:'DE UNOS SEGUNDOS A ≈ 20 MINUTOS',t:'LOS PRIMEROS NÚCLEOS',
+  p:['Cuando el universo se enfrió lo suficiente, protones y neutrones pudieron unirse sin romperse de inmediato: es la nucleosíntesis primordial.','Produjo aproximadamente un 75 % de hidrógeno y un 25 % de helio (en masa), más trazas de deuterio y litio. Esas proporciones coinciden con lo que medimos hoy.']}
+];
+const STG=[
+ ['13.8 MIL MILLONES DE AÑOS ATRÁS','EL BIG BANG','El universo comienza en un estado extremadamente caliente y denso y empieza a expandirse.','what_t'],
+ ['FRACCIONES DE SEGUNDO','PRIMEROS INSTANTES','Un plasma de partículas que se expande y se enfría con rapidez.','early_t'],
+ ['PRIMEROS MINUTOS','PRIMEROS NÚCLEOS','Protones y neutrones se unen y forman núcleos ligeros, sobre todo hidrógeno y helio.','nuc_t'],
+ ['≈ 380 000 AÑOS','PRIMEROS ÁTOMOS','Se forman átomos neutros y la luz viaja libre: es la radiación cósmica de fondo.','atom_t'],
+ ['ANTES DE LAS PRIMERAS ESTRELLAS','EDAD OSCURA','No hay estrellas. La gravedad concentra lentamente el gas.','dark_t'],
+ ['CIENTOS DE MILLONES DE AÑOS','PRIMERAS ESTRELLAS','El gas colapsa, se enciende la fusión nuclear y el universo vuelve a llenarse de luz.','star_t'],
+ ['PRIMERAS ESTRUCTURAS','PRIMERAS GALAXIAS','Aparecen pequeñas galaxias jóvenes, que hoy estudian telescopios como el James Webb.','gal0_t'],
+ ['CRECIMIENTO DE ESTRUCTURAS','FORMACIÓN DE GALAXIAS','Las galaxias crecen atrayendo gas y fusionándose entre sí.','gal1_t'],
+ ['EVOLUCIÓN A GRAN ESCALA','UNIVERSO EN EXPANSIÓN','La materia se organiza en cúmulos y filamentos mientras el espacio sigue expandiéndose.','web_t'],
+ ['HOY','UNIVERSO ACTUAL','13.8 mil millones de años después: cientos de miles de millones de galaxias en el universo observable.','now_t']
+];
+const T2=[
+ {id:'atom',l:'B r',tint:'rgba(90,50,150,.24)',im:[['atom','Visualización ilustrativa de la formación de los primeros átomos']],k:'',t:'LOS PRIMEROS ÁTOMOS',
+  p:['Unos 380 000 años después del Big Bang, el universo se enfrió lo suficiente para que electrones y núcleos formaran átomos neutros.','Antes, la luz chocaba sin cesar con partículas cargadas. Después pudo viajar libre: el universo se volvió transparente.']},
+ {id:'cmb',l:'A',tint:'rgba(120,60,20,.2)',im:[['cmb','Visualización ilustrativa de un mapa de la radiación cósmica de fondo, con variaciones mínimas de temperatura']],k:'',t:'LA PRIMERA LUZ',
+  p:['Esa luz liberada sigue llegándonos desde todas direcciones: es la radiación cósmica de fondo, detectada en 1965. Hoy es muy fría, unos 2,7 K (≈ −270 °C).','Sus diminutas variaciones de temperatura son las semillas de las galaxias y de los cúmulos.']},
+ {id:'osc',l:'B',tint:'rgba(100,40,40,.2)',im:[['dark_o','Visualización ilustrativa de la edad oscura, con gas frío y sin estrellas']],k:'EDAD OSCURA Y REIONIZACIÓN',t:'CUANDO NO HABÍA ESTRELLAS',pts:['Tras la primera luz, el universo era un mar de gas frío y oscuro, sin fuentes de luz visible.','La gravedad fue reuniendo ese gas en nubes cada vez más densas.','Las primeras estrellas y galaxias emitieron radiación ultravioleta que volvió a ionizar el gas: la reionización, completada hacia el primer millar de millones de años.']},
+ {id:'star',l:'C',tint:'rgba(150,110,30,.2)',im:[['nebula','Visualización ilustrativa de una nebulosa con estrellas jóvenes']],k:'',t:'NACEN LAS PRIMERAS ESTRELLAS',
+  p:['Tras la edad oscura, la gravedad hizo colapsar nubes de hidrógeno y helio. Al subir la presión y la temperatura en el centro se inició la fusión nuclear.','Ocurrió cientos de millones de años después del Big Bang.']},
+ {id:'polvo',l:'B r',tint:'rgba(150,80,40,.2)',im:[['nebula_p','Visualización ilustrativa de los restos de una estrella que enriquece el gas con elementos pesados']],k:'ORIGEN DE LOS ELEMENTOS',t:'SOMOS POLVO DE ESTRELLAS',p:['El Big Bang produjo sobre todo hidrógeno y helio. Los demás elementos, como el carbono o el oxígeno, se forjaron después dentro de las estrellas.','Al morir, muchas estrellas dispersan esos elementos por el espacio, donde pasan a formar nuevas estrellas, planetas y, en la Tierra, seres vivos.']},
+ {id:'gal',l:'E',tint:'rgba(40,50,150,.22)',im:[['gal0_b','Visualización ilustrativa de galaxias jóvenes y pequeñas','GALAXIAS JÓVENES'],['gal1_b','Visualización ilustrativa de una galaxia espiral madura','GALAXIAS MADURAS']],k:'',t:'NACEN LAS GALAXIAS',
+  p:['Bajo la gravedad, las primeras estructuras crecieron atrayendo gas y materia oscura, y al fusionarse con otras. El telescopio James Webb observa galaxias muy jóvenes, de hace más de 13 mil millones de años.']},
+ {id:'via',l:'A',tint:'rgba(40,50,150,.22)',im:[['spiral_v','Visualización ilustrativa de una galaxia espiral como la Vía Láctea']],k:'NUESTRO HOGAR',t:'LA VÍA LÁCTEA',p:['Nuestra galaxia es una espiral con entre 100 y 400 mil millones de estrellas.','El Sol está a unos 26 000 años luz del centro, y el Sistema Solar se formó hace unos 4 600 millones de años.']},
+ {id:'hoy',l:'D',im:[['web_h','Visualización ilustrativa de la red cósmica de galaxias, cúmulos y filamentos']],k:'',t:'EL UNIVERSO ACTUAL',
+  dt:['≈ 93 MIL MILLONES DE AÑOS LUZ DE DIÁMETRO','CIENTOS DE MILES DE MILLONES DE GALAXIAS','≈ 5 % MATERIA ORDINARIA','≈ 27 % MATERIA OSCURA · ≈ 68 % ENERGÍA OSCURA'],
+  p:['Las galaxias forman cúmulos unidos por filamentos, la llamada telaraña cósmica, y todo el conjunto sigue expandiéndose. Las cifras son estimaciones.']},
+ {id:'mat',l:'B',tint:'rgba(50,40,120,.2)',im:[['web_m','Visualización ilustrativa de la distribución de materia oscura y galaxias']],k:'LO QUE NO VEMOS',t:'MATERIA OSCURA Y ENERGÍA OSCURA',pts:['La materia oscura no emite luz, pero su gravedad se nota: hace girar las galaxias más deprisa de lo esperado y curva la luz de objetos lejanos.','La energía oscura es el nombre que damos a lo que parece acelerar la expansión.','Juntas suman cerca del 95 % del contenido del universo, y aún no sabemos qué son.']}
+];
+const T3=[
+ {id:'tel',l:'C',tint:'rgba(40,50,140,.2)',im:[['deep_t','Visualización ilustrativa de un campo profundo de galaxias lejanas']],k:'CÓMO LO OBSERVAMOS',t:'OJOS EN EL COSMOS',p:['Los telescopios funcionan como máquinas del tiempo. El Hubble (1990) midió la expansión y captó galaxias lejanas; Planck (2009–2013) cartografió la radiación cósmica de fondo.','El James Webb, que observa en infrarrojo, busca las primeras galaxias.']},
+ {id:'fut',l:'D',tint:'rgba(20,20,45,.3)',im:[['deep_f','Visualización ilustrativa de un universo futuro con galaxias cada vez más alejadas']],k:'LO QUE VIENE',t:'EL FUTURO DEL UNIVERSO',dt:['EXPANSIÓN QUE SE ACELERA','GALAXIAS CADA VEZ MÁS LEJANAS','ESTRELLAS QUE SE APAGAN','DEPENDE DE LA ENERGÍA OSCURA'],p:['Si la expansión sigue acelerándose, las galaxias lejanas dejarán de ser visibles y las estrellas terminarán agotando su combustible.','Es una predicción de los modelos actuales; la naturaleza de la energía oscura podría cambiar el desenlace.']}
+];
+/* Contenido ampliado */
+const T4=[
+ {id:'lem',l:'A',tint:'rgba(60,50,140,.2)',im:[['spiral_l','Visualización ilustrativa de una galaxia espiral']],k:'HISTORIA DE LA IDEA',t:'QUIÉN DESCUBRIÓ QUÉ',
+  p:['En 1915 Einstein publicó la relatividad general, base matemática de la cosmología moderna. En 1922 Alexander Friedmann halló soluciones de un universo en expansión.','En 1927 Georges Lemaître, sacerdote y físico belga, propuso que el universo se expande y lo vinculó con el alejamiento de las galaxias. En 1929 Hubble publicó medidas que lo respaldaron.','En 1965 Penzias y Wilson detectaron por casualidad la radiación cósmica de fondo, la prueba que consolidó el modelo.']},
+ {id:'dist',l:'B',tint:'rgba(30,60,150,.22)',im:[['cluster_d','Visualización ilustrativa de un cúmulo de galaxias']],k:'LA ESCALERA DE DISTANCIAS',t:'CÓMO SE MIDE EL COSMOS',
+  pts:['Paralaje: en estrellas cercanas, se mide cuánto parecen moverse cuando la Tierra orbita el Sol.','Cefeidas: estrellas cuyo ritmo de pulsación revela su brillo real y, por tanto, su distancia.','Supernovas de tipo Ia: explosiones de brillo muy parecido, visibles a miles de millones de años luz.','Cada peldaño calibra el siguiente: un error al principio se arrastra hacia arriba.']},
+ {id:'lcdm',l:'C',tint:'rgba(40,40,110,.22)',im:[['web_c','Visualización ilustrativa de la red cósmica']],k:'EL MODELO ESTÁNDAR',t:'LA RECETA DEL COSMOS',
+  p:['El modelo actual se llama ΛCDM: energía oscura (Λ) y materia oscura fría (CDM), sobre una base de relatividad general.','Con solo unos seis parámetros ajustables explica con notable precisión el fondo cósmico, la abundancia de elementos ligeros y la distribución de galaxias.','Aun así, dos de sus ingredientes principales no tienen todavía una identidad conocida.']},
+ {id:'bh',l:'B r',tint:'rgba(120,50,40,.2)',im:[['gal1_h','Visualización ilustrativa de una galaxia con núcleo brillante']],k:'GIGANTES OCULTOS',t:'AGUJEROS NEGROS SUPERMASIVOS',
+  pts:['Casi todas las galaxias grandes parecen tener uno en su centro; el de la Vía Láctea, Sagitario A*, pesa unos 4 millones de veces la masa del Sol.','Se han observado cuásares muy luminosos a menos de mil millones de años del Big Bang, lo que plantea cómo crecieron tan rápido.','El Event Horizon Telescope obtuvo en 2019 la primera imagen de la sombra de uno, el de la galaxia M87.']},
+ {id:'hub',l:'D',tint:'rgba(20,30,80,.25)',im:[['deep_u','Visualización ilustrativa de un campo profundo']],k:'UN ENIGMA ABIERTO',t:'LA TENSIÓN DE HUBBLE',
+  dt:['≈ 67 KM/S/MPC · FONDO CÓSMICO','≈ 73 KM/S/MPC · SUPERNOVAS','¿ERROR DE MEDIDA?','¿FÍSICA NUEVA?'],
+  p:['La constante de Hubble mide el ritmo actual de expansión. Deducida del fondo cósmico da un valor algo menor que la medida con supernovas y cefeidas.','La diferencia persiste tras muchas comprobaciones. Puede ser un error sistemático aún no identificado o una pista de física nueva; sigue siendo un tema de investigación activa.']}
+];
+let _n=0;[...T1,...T2,...T3,...T4].forEach(d=>d.n=String(++_n).padStart(2,'0'));
+const ST=[[13.8,'MIL MILLONES DE AÑOS','edad del universo'],[380000,'AÑOS','hasta la primera luz'],[2.7,'KELVIN','temperatura actual del fondo cósmico'],[93,'MIL MILLONES DE AÑOS LUZ','diámetro del universo observable']];
+const MY=[['«FUE UNA EXPLOSIÓN»','No: fue una expansión del propio espacio, en todas partes a la vez.'],['«OCURRIÓ EN UN PUNTO»','No hay un centro: cada observador ve alejarse las galaxias lejanas.'],['«SABEMOS QUÉ PASÓ EN EL INSTANTE CERO»','Los modelos describen bien el universo desde una fracción de segundo después; el origen mismo sigue abierto.'],['«LAS GALAXIAS VUELAN POR EL ESPACIO»','Sobre todo es el espacio entre ellas el que se estira.']];
+const GAL=[['spiral','Galaxia espiral'],['nebula_a','Nebulosa'],['cluster','Cúmulo de galaxias'],['deep','Campo profundo de galaxias lejanas'],['nebula_b','Región de formación estelar']];
+const EV=[['GALAXIAS QUE SE ALEJAN','Su luz llega desplazada al rojo, y la velocidad crece con la distancia.'],['RADIACIÓN CÓSMICA DE FONDO','Una luz fría y casi uniforme, la huella del universo temprano.'],['ELEMENTOS LIGEROS','Las proporciones de hidrógeno y helio coinciden con las que predice el modelo.'],['ESTRUCTURA A GRAN ESCALA','La distribución de galaxias encaja con el crecimiento de las semillas primordiales.']];
+
+/* ---------- Componentes ---------- */
+const Sp=t=>t.split(' ').flatMap((w,i)=>[h('span',{key:i,className:'wd'},h('span',null,w)),' ']);
+const Sec=({cls,id,tint,children})=>h('section',{className:'sec',id,'data-tint':tint},h('div',{className:'si '+cls},children));
+const Tx=({d})=>h('div',{className:'tx'},h('p',{className:'k'},(d.n?'TEMA '+d.n+(d.k?' · ':''):'')+d.k),h('h2',null,Sp(d.t)),(d.p||[]).map((s,i)=>h('p',{key:i,className:'p'},s)),d.pts&&h('ul',{className:'pts'},d.pts.map((s,i)=>h('li',{key:i},s))));
+const Topic=({d})=>h(Sec,{cls:d.l,id:d.id,tint:d.tint},
+  d.im.map((m,i)=>h('div',{className:'im',key:i},h(Art,{t:m[0],alt:m[1]}),m[2]&&h('span',{className:'cap'},m[2]))),
+  h(Tx,{d}),(d.dt||[]).map((s,i)=>h('span',{key:i,className:'dt d'+i},s)));
+const Hero=()=>h('header',{className:'hero','data-tint':'rgba(150,55,15,.2)'},h('div',{className:'im',style:{position:'absolute',inset:0}},h(Art,{t:'hero',alt:'Fondo oscuro con un tenue resplandor cálido, ilustración del universo primitivo'})),
+  h('div',{className:'w'},h('h1',null,'EL BIG BANG'),h('p',{className:'hp'},'El origen y la evolución del universo')),h('p',{className:'cue'},'SCROLL ↓'));
+const Timeline=()=>h('section',{className:'tl','data-tint':'rgba(40,50,150,.2)','aria-label':'Línea de tiempo del universo'},h('div',{className:'wrap'},h('div',{className:'trk'},STG.map((s,i)=>
+  h('article',{className:'st',key:i},h('span',{className:'d'},s[0]),h('i'),h('div',{className:'im'},h(Art,{t:s[3],alt:ill+s[1].toLowerCase()})),
+    h('p',{className:'n'},(i<9?'0':'')+(i+1)),h('h3',null,s[1]),h('p',{className:'p'},s[2]))))),h('p',{className:'tlc'},'01 / 10'),h('div',{className:'dark'}));
+function Gallery(){
+  const [o,setO]=useState(-1);
+  useEffect(()=>{const f=e=>e.key==='Escape'&&setO(-1);addEventListener('keydown',f);return()=>removeEventListener('keydown',f)},[]);
+  return h(Sec,{cls:'',id:'gal',tint:'rgba(50,60,160,.18)'},h('div',{className:'tx'},h('p',{className:'k'},'GALERÍA'),h('h2',null,Sp('EL UNIVERSO A TRAVÉS DE NUESTROS TELESCOPIOS'))),
+    h('div',{className:'gal'},GAL.map((g,i)=>h('div',{className:'gi',key:i,tabIndex:0,role:'button','aria-label':'Ampliar: '+g[1],onClick:()=>setO(i),onKeyDown:e=>e.key==='Enter'&&setO(i)},h(Art,{t:g[0],alt:ill+g[1].toLowerCase()})))),
+    o>=0&&ReactDOM.createPortal(h('div',{className:'lb',onClick:()=>setO(-1)},h('div',null,h('div',{className:'im'},h(Art,{t:GAL[o][0],alt:ill+GAL[o][1].toLowerCase()})),h('p',null,GAL[o][1].toUpperCase()+' · CLIC PARA CERRAR'))),document.body));
+}
+const Evid=({id,k,t,data})=>h(Sec,{cls:'',id,tint:'rgba(60,70,150,.15)'},h('div',{className:'tx'},h('p',{className:'k'},k),h('h2',null,Sp(t))),
+  data.map((e,i)=>h('div',{className:'ev',key:i},h('b',null,'0'+(i+1)),h('div',null,h('h3',null,e[0]),h('p',{className:'p'},e[1])))));
+const Final=()=>h(Sec,{cls:'F',id:'antes',tint:'rgba(10,10,25,.1)'},h('div',{className:'tx'},h('p',{className:'k'},'TEMA '+String(_n+1).padStart(2,'0')),h('h2',null,Sp('¿QUÉ HABÍA ANTES')),h('h2',null,Sp('DEL BIG BANG?')),
+  h('p',{className:'p'},'Depende de qué entendamos por «antes». Si el tiempo comenzó con el Big Bang, la pregunta quizá no tenga sentido; otras hipótesis proponen fases previas.'),h('p',{className:'p'},'No hay una respuesta confirmada: es una pregunta de investigación abierta.')));
+const Stats=()=>h(Sec,{cls:'',id:'datos',tint:'rgba(20,60,140,.18)'},h('div',{className:'tx'},h('p',{className:'k'},'DATOS CLAVE'),h('h2',null,Sp('EL UNIVERSO EN CIFRAS'))),h('div',{className:'sg'},ST.map((v,i)=>h('div',{className:'stat',key:i},h('b',{'data-v':v[0]},'0'),h('span',null,v[1]),h('small',null,v[2])))));
+function Dust(){
+  const r=useRef();
+  useEffect(()=>{const c=r.current,x=c.getContext('2d');let w,ht,raf;const n=red?0:mob?30:70,p=[...Array(n)].map(()=>[Math.random(),Math.random(),.6+Math.random()*1.2,Math.random()*.0003+.00008]);
+    const rs=()=>{w=c.width=innerWidth;ht=c.height=innerHeight};rs();addEventListener('resize',rs);
+    const f=()=>{x.clearRect(0,0,w,ht);x.fillStyle='rgba(200,210,255,.4)';for(const q of p){q[1]-=q[3];if(q[1]<0)q[1]=1;x.fillRect(q[0]*w,q[1]*ht,q[2],q[2])}raf=requestAnimationFrame(f)};f();
+    return()=>{cancelAnimationFrame(raf);removeEventListener('resize',rs)}},[]);
+  return h('canvas',{ref:r,className:'dust','aria-hidden':true});
+}
+
+/* ---------- App + animaciones ScrollTrigger ---------- */
+function App(){
+  const root=useRef();
+  useEffect(()=>{
+    const ctx=gsap.context(()=>{
+      try{
+        const q=gsap.utils.selector(root.current),sc=red?true:1;
+        if(window.Lenis&&!red){const ln=new Lenis({lerp:.09});ln.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>ln.raf(t*1000));gsap.ticker.lagSmoothing(0)}
+        if(!mob&&!red)addEventListener('mousemove',e=>{gsap.to('.sec .im .a,.hero .a',{x:(e.clientX/innerWidth-.5)*-26,y:(e.clientY/innerHeight-.5)*-16,duration:1.4,ease:'power2.out',overwrite:'auto'})});
+        if(!red)gsap.to(q('.dt'),{yPercent:14,repeat:-1,yoyo:true,duration:3.2,ease:'sine.inOut',stagger:.5});
+        gsap.from(q('.hero .w'),{opacity:0,scale:.9,duration:2.4,ease:'power2.out'});gsap.from(q('.cue'),{opacity:0,delay:2,duration:1.5});
+        const hs={trigger:'.hero',start:'top top',end:'bottom top',scrub:sc};
+        gsap.to(q('.hero .a'),{scale:1.45,ease:'none',scrollTrigger:hs});
+        gsap.to(q('.hero h1'),{scale:2,opacity:0,ease:'none',scrollTrigger:hs});
+        gsap.to(q('.hero .hp,.cue'),{y:-80,opacity:0,ease:'none',scrollTrigger:hs});
+        /* Timeline horizontal con pin: se crea ANTES que las secciones para que el espacio del pin cuente en sus posiciones */
+        const trk=q('.trk')[0],wrap=q('.wrap')[0],dk=q('.tl .dark')[0],sts=gsap.utils.toArray(q('.st')),dist=()=>trk.scrollWidth-innerWidth;
+        const cnt=q('.tlc')[0],apply=()=>{const x=gsap.getProperty(trk,'x'),vw=innerWidth;let bi=0,bu=9;sts.forEach((s,i)=>{const d=(s.offsetLeft+x+s.offsetWidth/2-vw/2)/vw,u=Math.min(1,Math.abs(d));if(u<bu){bu=u;bi=i}
+          gsap.set(s.querySelector('.im'),d>0?{scale:1-.15*u,opacity:1-.65*u}:{scale:1+.08*u,opacity:1-.5*u});
+          gsap.set(s.querySelectorAll('h3,.p,.n,.d'),{opacity:1-.75*u,x:d*46});gsap.set(s.querySelector('i'),{scale:1+1.3*(1-u)})});
+          cnt.textContent=(bi<9?'0':'')+(bi+1)+' / 10'};
+        gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:q('.tl')[0],start:'top top',end:()=>'+='+Math.round(dist()*1.2),pin:true,scrub:sc,anticipatePin:1,invalidateOnRefresh:true,refreshPriority:1,onRefresh:apply}})
+          .to(trk,{x:()=>-dist(),duration:1,onUpdate:apply})
+          .to(wrap,{scale:.94,opacity:0,duration:.12},1.08).to(dk,{opacity:.9,duration:.12},1.08);
+        apply();
+        /* Capa de mundo */
+        const els=gsap.utils.toArray(q('.hero,.sec,.tl')),wb=q('.wb')[0],
+          pc=e=>{const m=(e.dataset.tint||'rgba(20,24,60,.12)').match(/[\d.]+/g).map(Number);return[m[0],m[1],m[2],Math.min(.6,m[3]*2.4)]},cs=els.map(pc);
+        const paintWb=()=>{const H=innerHeight;let i=0;for(let j=1;j<els.length;j++)if(els[j].getBoundingClientRect().top<H*.85)i=j;else break;
+          let c=cs[0];if(i>0){const k=Math.min(1,Math.max(0,(H*.85-els[i].getBoundingClientRect().top)/(H*.7))),a=cs[i-1],b=cs[i];c=a.map((v,n)=>v+(b[n]-v)*k)}
+          wb.style.setProperty('--wc',Math.round(c[0])+','+Math.round(c[1])+','+Math.round(c[2]));wb.style.setProperty('--wa',c[3].toFixed(3))};
+        ScrollTrigger.create({start:0,end:'max',onUpdate:paintWb,onRefresh:paintWb});paintWb();
+        gsap.to(q('.wb i')[0],{yPercent:14,ease:'none',scrollTrigger:{start:0,end:'max',scrub:true}});gsap.to(q('.wb i')[1],{xPercent:-12,ease:'none',scrollTrigger:{start:0,end:'max',scrub:true}});
+        /* Variantes de transición */
+        const V=[{i:{scale:1.12,opacity:0,transformOrigin:'50% 50%'},o:{scale:1.08,opacity:0}},
+          {i:{x:'9vw',opacity:0},o:{x:'-7vw',opacity:0}},
+          {i:{clipPath:'circle(10% at 50% 62%)',opacity:.15},ct:'circle(90% at 50% 50%)',o:{scale:1.05,opacity:0,filter:'blur(8px)'}},
+          {i:{y:'14vh',opacity:0},o:{y:'-9vh',opacity:0}},
+          {i:{filter:'blur(12px)',opacity:0},o:{filter:'blur(10px)',opacity:0,scale:.97}},
+          {i:{clipPath:'polygon(0% 0%,42% 0%,12% 100%,0% 100%)',opacity:.15},ct:'polygon(0% 0%,100% 0%,100% 100%,0% 100%)',o:{x:'6vw',opacity:0}}],
+          N={opacity:1,scale:1,x:0,y:0,filter:'blur(0px)'},secs=gsap.utils.toArray(q('.sec'));
+        secs.forEach((s,idx)=>{const si=s.querySelector('.si'),v=V[idx%V.length];
+          if(!red){gsap.fromTo(si,v.i,Object.assign({},N,v.ct?{clipPath:v.ct}:{},{ease:'none',scrollTrigger:{trigger:s,start:'top 100%',end:'top 32%',scrub:.8}}));
+            if(idx<secs.length-1)gsap.fromTo(si,Object.assign({},N),Object.assign({},v.o,{ease:'none',immediateRender:false,scrollTrigger:{trigger:s,start:'bottom 78%',end:'bottom 4%',scrub:.8}}))}
+        });
+        secs.forEach((s,idx)=>{const si=s.querySelector('.si');
+          gsap.fromTo(s.querySelectorAll('.im .a'),{scale:1.3,yPercent:-6},{scale:1.05,yPercent:6,ease:'none',scrollTrigger:{trigger:s,start:'top bottom',end:'bottom top',scrub:true}});
+          if(!si.matches('.A,.C'))gsap.fromTo(s.querySelectorAll('.im'),{clipPath:'inset(14% 12% 14% 12%)',scale:.94},{clipPath:'inset(0% 0% 0% 0%)',scale:1,ease:'none',scrollTrigger:{trigger:s,start:'top 90%',end:'top 30%',scrub:.6}});
+          gsap.timeline({scrollTrigger:{trigger:s,start:'top 62%',toggleActions:'play none none reverse'}})
+            .from(s.querySelectorAll('.wd>span'),{yPercent:115,rotate:4,duration:1.1,ease:'power4.out',stagger:.07},0)
+            .from(s.querySelectorAll('.k,.p,.pts li,.dt,.ev,.gal,.stat'),{opacity:0,y:36,duration:.9,ease:'power3.out',stagger:.1},.25);
+          s.querySelectorAll('[data-v]').forEach(e=>{const v=+e.dataset.v,o={n:0},dc=v%1?1:0;gsap.to(o,{n:v,duration:2.4,ease:'power2.out',scrollTrigger:{trigger:e,start:'top 85%',toggleActions:'play none none reverse'},onUpdate:()=>e.textContent=o.n.toLocaleString('es-ES',{minimumFractionDigits:dc,maximumFractionDigits:dc})})});
+          const sh=s.querySelector('.shade');if(sh)gsap.to(sh,{opacity:s.matches('.F')?1:.55,ease:'none',scrollTrigger:{trigger:s,start:'bottom 85%',end:'bottom 10%',scrub:true}});
+        });
+        const bar=q('.bar')[0];ScrollTrigger.create({start:0,end:'max',onUpdate:s=>bar.style.transform='scaleX('+s.progress+')'});
+        addEventListener('load',()=>ScrollTrigger.refresh());
+        document.fonts&&document.fonts.ready.then(()=>ScrollTrigger.refresh());
+      }catch(e){console.error('Animación:',e)}
+    },root);
+    return()=>ctx.revert();
+  },[]);
+  return h('div',{ref:root},h('div',{className:'wb'},h('i'),h('i')),h('div',{className:'bar'}),h(Dust),h(Hero),T1.map(d=>h(Topic,{key:d.id,d})),h(Timeline),T2.map(d=>h(Topic,{key:d.id,d})),h(Stats),h(Gallery),T3.map(d=>h(Topic,{key:d.id,d})),T4.map(d=>h(Topic,{key:d.id,d})),h(Evid,{id:'sab',k:'LAS PRUEBAS',t:'¿CÓMO SABEMOS TODO ESTO?',data:EV}),h(Evid,{id:'mit',k:'ACLARANDO IDEAS',t:'MITOS FRECUENTES',data:MY}),h(Final),
+    h('p',{className:'note'},'Las imágenes son visualizaciones ilustrativas generadas en el navegador, no fotografías. Para usar imágenes reales de NASA, ESA, Webb o Planck, añade sus rutas en el objeto ASSETS del código. Las cifras son aproximadas.'));
+}
+ReactDOM.createRoot(document.getElementById('root')).render(h(App));
+</script>
+</body>
+</html>
